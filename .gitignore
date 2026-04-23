@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+
+# Kotlin
+.kotlin/
+
+# Build
+build/
+out/
+
+# Frontend
+node_modules/
+dist/
+.vite/
+
+# Env
+.env

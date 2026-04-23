@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+
+# env
+.env
+.env.local

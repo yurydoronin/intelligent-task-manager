@@ -1,0 +1,17 @@
+# Gradle
+.gradle/
+build/
+
+# Kotlin
+.kotlin/
+
+# IntelliJ (backend module)
+.idea/
+*.iml
+out/
+
+# OS
+.DS_Store
+
+# Test/build outputs
+**/build/
