@@ -1,5 +1,4 @@
 plugins {
-    application
     kotlin("jvm")
     kotlin("plugin.spring")
     kotlin("plugin.jpa")
@@ -14,9 +13,10 @@ allOpen {
 }
 
 dependencies {
+    implementation(project(":api"))
+    implementation(project(":common:types"))
     implementation(project(":core:application"))
     implementation(project(":core:domain"))
-    implementation(project(":common:types"))
 
     // Spring
     implementation("org.springframework.boot:spring-boot-starter")
@@ -30,8 +30,7 @@ dependencies {
     implementation("io.arrow-kt:arrow-core:2.2.2.1")
 
     // Logging
-    implementation("ch.qos.logback:logback-classic:1.5.13")
-    implementation("org.zalando:logbook-ktor:3.12.3")
+    implementation("ch.qos.logback:logback-classic:1.5.32")
 
     // DB
     implementation("org.postgresql:postgresql:42.7.3")
@@ -48,7 +47,15 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
     testImplementation("io.kotest:kotest-assertions-arrow-jvm:6.0.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql:1.20.4")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.4")
     testImplementation("com.ninja-squad:springmockk:5.0.1")
+}
+
+springBoot {
+    mainClass.set("task.manager.infrastructure.TaskManagerApplicationKt")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

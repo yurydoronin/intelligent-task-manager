@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
+    id("io.spring.dependency-management")
 }
 
 dependencies {
@@ -10,4 +11,6 @@ dependencies {
     // Arrow.Either
     implementation("io.arrow-kt:arrow-core:2.2.2.1")
 
+    // Jdbc
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc:4.0.5")
 }

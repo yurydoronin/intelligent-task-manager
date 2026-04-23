@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "2.3.21" apply false
     kotlin("plugin.spring") version "2.3.21" apply false
     kotlin("plugin.jpa") version "2.3.21" apply false
-    id("org.springframework.boot") version "3.5.4"
+    id("org.springframework.boot") version "4.0.5" apply false
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -22,23 +22,5 @@ subprojects {
 
     extensions.configure<KotlinJvmProjectExtension> {
         jvmToolchain(25)
-    }
-}
-
-tasks.register("printSrc") {
-    doLast {
-        subprojects.forEach { project ->
-            val srcDir = project.file("src/main/kotlin")
-
-            if (srcDir.exists()) {
-                println("== ${project.path} ==")
-
-                srcDir.walkTopDown()
-                    .filter { it.isFile }
-                    .forEach {
-                        println(it.relativeTo(srcDir))
-                    }
-            }
-        }
     }
 }

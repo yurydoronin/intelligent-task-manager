@@ -8,11 +8,15 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":common:types"))
 
+    implementation("org.springframework.boot:spring-boot-starter-web:4.0.5")
 
     // Arrow.Either
     implementation("io.arrow-kt:arrow-core:2.2.2.1")
 
     // Logging
-    implementation("ch.qos.logback:logback-classic:1.5.13")
-    implementation("org.zalando:logbook-ktor:3.12.3")
+    implementation("ch.qos.logback:logback-classic:1.5.32")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
