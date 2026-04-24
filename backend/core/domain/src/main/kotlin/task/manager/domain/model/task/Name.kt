@@ -6,7 +6,7 @@ value class Name(
 ) {
     companion object {
         fun of(value: String): Name {
-            require(value.isNotBlank())
+            require(value.isNotBlank()) { "Название задачи не должно быть пустым" }
             return Name(value)
         }
     }

@@ -32,12 +32,12 @@ class Task private constructor(
             description: String?,
             priority: Priority,
             deadline: Instant?,
-            timeProvider: TimeProvider
+            now: Instant
         ): Either<TaskError, Task> = either {
 
-            val now = timeProvider.now()
-
-            ensure(deadline?.isAfter(now) == true) { TaskError.InvalidDeadline }
+            deadline?.let {
+                ensure(it.isAfter(now)) { TaskError.InvalidDeadline }
+            }
 
             Task(
                 id = TaskId.of(),
@@ -50,6 +50,27 @@ class Task private constructor(
                 completedAt = null
             )
         }
+
+        fun restore(
+            id: TaskId,
+            name: Name,
+            description: String?,
+            priority: Priority,
+            status: Status,
+            createdAt: Instant,
+            deadline: Instant?,
+            completedAt: Instant?
+        ): Task =
+            Task(
+                id = id,
+                name = name,
+                description = description,
+                priority = priority,
+                status = status,
+                createdAt = createdAt,
+                deadline = deadline,
+                completedAt = completedAt
+            )
     }
 
     fun start(): Either<TaskError, Task> = either {

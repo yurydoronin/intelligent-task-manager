@@ -10,6 +10,8 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-web:4.0.5")
 
+    implementation("tools.jackson.module:jackson-module-kotlin:3.1.0")
+
     // Arrow.Either
     implementation("io.arrow-kt:arrow-core:2.2.2.1")
 

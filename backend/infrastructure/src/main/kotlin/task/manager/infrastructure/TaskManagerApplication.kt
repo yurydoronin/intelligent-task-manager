@@ -6,7 +6,8 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication(scanBasePackages = [
     "task.manager.input.adapters",
-    "task.manager.application"
+    "task.manager.application.ports",
+    "task.manager.infrastructure",
 ])
 @ConfigurationPropertiesScan
 class TaskManagerApplication

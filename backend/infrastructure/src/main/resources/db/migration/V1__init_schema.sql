@@ -1,14 +1,11 @@
 -- Таблица для Task
-CREATE TYPE priority AS ENUM ('HIGH', 'MIDDLE', 'LOW');
-CREATE TYPE status AS ENUM ('WAIT', 'WORK', 'DONE');
-
 CREATE TABLE task
 (
     id           UUID PRIMARY KEY,
     name         VARCHAR(100)             NOT NULL,
     description  VARCHAR(255),
-    priority     priority                 NOT NULL,
-    status       status                   NOT NULL,
+    priority     VARCHAR(20)              NOT NULL,
+    status       VARCHAR(20)              NOT NULL,
     created_at   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     deadline     TIMESTAMP WITH TIME ZONE,
     completed_at TIMESTAMP WITH TIME ZONE
