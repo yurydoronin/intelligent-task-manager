@@ -2,8 +2,6 @@ package task.manager.input.adapters.http
 
 import java.time.Instant
 import java.util.UUID
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -19,12 +17,7 @@ class GetActiveTaskController(
     private val useCase: GetTaskUseCase
 ) {
     @GetMapping
-    fun get(): ResponseEntity<List<ActiveTaskResponse>> =
-        useCase.execute()
-            .fold(
-                ifLeft = { ResponseEntity.status(HttpStatus.NOT_FOUND).build() },
-                ifRight = { results -> ResponseEntity.ok(results.toResponse()) }
-            )
+    fun get(): List<ActiveTaskResponse> = useCase.execute().toResponse()
 }
 
 /**
@@ -49,8 +42,8 @@ data class ActiveTaskResponse(
     val id: UUID,
     val name: Name,
     val description: String?,
-    val priority: Priority,
-    val status: Status,
+    val priority: Priority, //утечка доменных сущностей в api
+    val status: Status, //утечка
     val createdAt: Instant,
     val deadline: Instant?,
     val completedAt: Instant?

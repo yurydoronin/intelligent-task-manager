@@ -31,6 +31,7 @@ dependencies {
 
     // Logging
     implementation("ch.qos.logback:logback-classic:1.5.32")
+    implementation("org.zalando:logbook-spring-boot-starter:4.0.4")
 
     // DB
     implementation("org.postgresql:postgresql:42.7.3")
