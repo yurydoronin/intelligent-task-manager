@@ -14,7 +14,7 @@ interface GetTaskUseCase {
  * (output DTO) List of active tasks
  */
 data class GetActiveTaskResult(
-    val taskId: TaskId, //утечка?
+    val taskId: TaskId,
     val name: Name,
     val description: String?,
     val priority: Priority,

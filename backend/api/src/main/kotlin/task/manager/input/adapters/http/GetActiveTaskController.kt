@@ -29,10 +29,10 @@ fun List<GetActiveTaskResult>.toResponse(): List<ActiveTaskResponse> =
 fun GetActiveTaskResult.toResponse(): ActiveTaskResponse =
     ActiveTaskResponse(
         id = taskId.id,
-        name = name,
+        name = name.value,
         description = description,
-        priority = priority,
-        status = status,
+        priority = priority.name,
+        status = status.name,
         createdAt = createdAt,
         deadline = deadline,
         completedAt = completedAt,
@@ -40,10 +40,10 @@ fun GetActiveTaskResult.toResponse(): ActiveTaskResponse =
 
 data class ActiveTaskResponse(
     val id: UUID,
-    val name: Name,
+    val name: String,
     val description: String?,
-    val priority: Priority, //утечка доменных сущностей в api
-    val status: Status, //утечка
+    val priority: String,
+    val status: String,
     val createdAt: Instant,
     val deadline: Instant?,
     val completedAt: Instant?
