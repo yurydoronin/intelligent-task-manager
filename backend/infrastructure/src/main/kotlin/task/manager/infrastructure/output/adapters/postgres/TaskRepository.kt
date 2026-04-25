@@ -2,11 +2,7 @@ package task.manager.infrastructure.output.adapters.postgres
 
 import org.springframework.stereotype.Repository
 import task.manager.application.ports.output.TaskRepositoryPort
-import task.manager.domain.model.task.Name
-import task.manager.domain.model.task.Priority
-import task.manager.domain.model.task.Status
-import task.manager.domain.model.task.Task
-import task.manager.domain.model.task.TaskId
+import task.manager.domain.model.task.*
 import task.manager.infrastructure.output.adapters.postgres.entities.TaskEntity
 
 @Repository
@@ -17,6 +13,15 @@ class TaskRepository(
     override fun save(task: Task) {
         repo.save(task.toEntity())
     }
+
+    override fun delete(task: Task) {
+        repo.delete(task.toEntity())
+    }
+
+    override fun findById(id: TaskId): Task? =
+        repo.findById(id.id)
+            .orElse(null)
+            ?.toDomain()
 }
 
 fun Task.toEntity(): TaskEntity =
