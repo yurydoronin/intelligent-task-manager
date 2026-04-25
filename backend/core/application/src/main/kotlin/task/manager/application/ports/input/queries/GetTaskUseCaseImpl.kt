@@ -20,7 +20,7 @@ class GetTaskUseCaseImpl(
         val sql = """
         SELECT t.id, t.name, t.description, t.priority, t.status, t.created_at, t.deadline, t.completed_at
         FROM task t
-    """.trimIndent()
+        """.trimIndent()
 
         val mapper = RowMapper { rs, _ ->
             GetActiveTaskResult(
