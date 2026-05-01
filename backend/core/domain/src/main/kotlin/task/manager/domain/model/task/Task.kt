@@ -105,11 +105,34 @@ class Task private constructor(
         )
     }
 
-//    fun changePriority()
-//    fun reschedule()
+    fun patch(
+        description: String?,
+        priority: Priority?,
+        status: Status?,
+        deadline: Instant?,
+        now: Instant
+    ): Either<TaskError, Task> = either {
+
+        deadline?.let {
+            ensure(it.isAfter(now)) { TaskError.InvalidDeadline }
+        }
+
+        Task(
+            id = id,
+            name = name,
+            description = description ?: this@Task.description,
+            priority = priority ?: this@Task.priority,
+            status = status ?: this@Task.status,
+            createdAt = createdAt,
+            deadline = deadline ?: this@Task.deadline,
+            completedAt = completedAt
+        )
+    }
+
 }
 
 sealed class TaskError(override val message: String) : BusinessError {
     data object InvalidDeadline : TaskError("Срок выполнения задачи должен быть в будущем")
     data object InvalidStatus : TaskError("Недопустимый статус задачи")
+    data object TaskNotFound : TaskError("Задача не найдена")
 }
