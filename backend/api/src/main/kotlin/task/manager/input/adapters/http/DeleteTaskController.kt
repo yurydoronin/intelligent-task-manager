@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import task.manager.application.ports.input.commands.DeleteTaskCommand
 import task.manager.application.ports.input.commands.DeleteTaskUseCase
-import task.manager.application.ports.input.commands.TaskError
+import task.manager.domain.model.task.TaskError
 
 @RestController
 @RequestMapping("/api/v1/task")
@@ -22,7 +22,7 @@ class DeleteTaskController(
             .fold(
                 ifLeft = { error ->
                     when (error) {
-                        is TaskError.NotFound -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.message)
+                        is TaskError.TaskNotFound -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.message)
                         else -> ResponseEntity.badRequest().body(error.message)
                     }
                 },

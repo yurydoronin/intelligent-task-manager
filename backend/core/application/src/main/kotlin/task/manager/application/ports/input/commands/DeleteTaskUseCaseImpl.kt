@@ -5,6 +5,7 @@ import arrow.core.raise.either
 import arrow.core.raise.ensureNotNull
 import org.springframework.stereotype.Service
 import task.manager.application.ports.output.TaskRepositoryPort
+import task.manager.domain.model.task.TaskError
 import task.manager.domain.model.task.TaskId
 import task.manager.types.error.BusinessError
 
@@ -15,15 +16,9 @@ class DeleteTaskUseCaseImpl(
 
     override fun execute(command: DeleteTaskCommand): Either<BusinessError, Unit> = either {
         val task = ensureNotNull(taskRepo.findById(TaskId(command.taskId))) {
-            TaskError.NotFound
+            TaskError.TaskNotFound
         }
 
         taskRepo.delete(task)
-    }
-}
-
-sealed interface TaskError : BusinessError {
-    data object NotFound : TaskError {
-        override val message: String = "Задача не найдена"
     }
 }
