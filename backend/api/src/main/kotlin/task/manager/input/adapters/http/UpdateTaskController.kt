@@ -45,7 +45,7 @@ data class UpdateTaskRequest(
     val deadline: Instant? = null
 )
 
-fun UpdateTaskRequest.toCommand(taskId: UUID): UpdateTaskCommand =
+private fun UpdateTaskRequest.toCommand(taskId: UUID): UpdateTaskCommand =
     UpdateTaskCommand(
         taskId = taskId,
         description = description,

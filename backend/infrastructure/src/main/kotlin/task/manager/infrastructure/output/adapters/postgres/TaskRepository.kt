@@ -24,7 +24,7 @@ class TaskRepository(
             ?.toDomain()
 }
 
-fun Task.toEntity(): TaskEntity =
+private fun Task.toEntity(): TaskEntity =
     TaskEntity.of(
         id = id.id,
         name = name.value,
@@ -36,7 +36,7 @@ fun Task.toEntity(): TaskEntity =
         completedAt = completedAt
     )
 
-fun TaskEntity.toDomain(): Task =
+private fun TaskEntity.toDomain(): Task =
     Task.restore(
         id = TaskId(id),
         name = Name.of(name),

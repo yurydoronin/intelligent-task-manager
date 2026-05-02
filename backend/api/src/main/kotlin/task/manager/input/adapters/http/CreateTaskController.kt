@@ -40,7 +40,7 @@ data class CreateTaskRequest(
     val deadline: Instant?
 )
 
-fun CreateTaskRequest.toCommand(): CreateTaskCommand =
+private fun CreateTaskRequest.toCommand(): CreateTaskCommand =
     CreateTaskCommand(
         name = name,
         description = description,

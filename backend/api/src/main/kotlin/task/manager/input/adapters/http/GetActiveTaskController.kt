@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import task.manager.application.ports.input.queries.GetActiveTaskResult
 import task.manager.application.ports.input.queries.GetTaskUseCase
-import task.manager.domain.model.task.Name
-import task.manager.domain.model.task.Priority
-import task.manager.domain.model.task.Status
 
 @RestController
 @RequestMapping("/api/v1/task/active")
@@ -33,10 +30,11 @@ data class ActiveTaskResponse(
     private val deadline: Instant?,
     private val completedAt: Instant?
 )
-fun List<GetActiveTaskResult>.toResponse(): List<ActiveTaskResponse> =
+
+private fun List<GetActiveTaskResult>.toResponse(): List<ActiveTaskResponse> =
     map { it.toResponse() }
 
-fun GetActiveTaskResult.toResponse(): ActiveTaskResponse =
+private fun GetActiveTaskResult.toResponse(): ActiveTaskResponse =
     ActiveTaskResponse(
         id = taskId.id,
         name = name.value,
