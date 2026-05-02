@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "task")
-class TaskEntity constructor(
+class TaskEntity private constructor(
     @Id
     val id: UUID,
     val name: String,

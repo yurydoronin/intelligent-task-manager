@@ -25,7 +25,7 @@ class TaskRepository(
 }
 
 fun Task.toEntity(): TaskEntity =
-    TaskEntity(
+    TaskEntity.of(
         id = id.id,
         name = name.value,
         description = description,

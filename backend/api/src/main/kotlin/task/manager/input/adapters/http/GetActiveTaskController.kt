@@ -23,6 +23,16 @@ class GetActiveTaskController(
 /**
  * (DTO) HTTP-Response containing the list of active tasks
  */
+data class ActiveTaskResponse(
+    private val id: UUID,
+    private val name: String,
+    private val description: String?,
+    private val priority: String,
+    private val status: String,
+    private val createdAt: Instant,
+    private val deadline: Instant?,
+    private val completedAt: Instant?
+)
 fun List<GetActiveTaskResult>.toResponse(): List<ActiveTaskResponse> =
     map { it.toResponse() }
 
@@ -37,14 +47,3 @@ fun GetActiveTaskResult.toResponse(): ActiveTaskResponse =
         deadline = deadline,
         completedAt = completedAt,
     )
-
-data class ActiveTaskResponse(
-    val id: UUID,
-    val name: String,
-    val description: String?,
-    val priority: String,
-    val status: String,
-    val createdAt: Instant,
-    val deadline: Instant?,
-    val completedAt: Instant?
-)
