@@ -1,14 +1,18 @@
 package task.manager.infrastructure.output.adapters.postgres
 
 import org.springframework.stereotype.Repository
-import task.manager.application.ports.output.TaskRepositoryPort
+import task.manager.application.ports.output.persistence.DeleteTaskRepositoryPort
+import task.manager.application.ports.output.persistence.LoadTaskRepositoryPort
+import task.manager.application.ports.output.persistence.SaveTaskRepositoryPort
 import task.manager.domain.model.task.*
 import task.manager.infrastructure.output.adapters.postgres.entities.TaskEntity
 
 @Repository
 class TaskRepository(
     private val repo: TaskJpaRepository
-) : TaskRepositoryPort {
+) : LoadTaskRepositoryPort,
+    SaveTaskRepositoryPort,
+    DeleteTaskRepositoryPort {
 
     override fun save(task: Task) {
         repo.save(task.toEntity())
