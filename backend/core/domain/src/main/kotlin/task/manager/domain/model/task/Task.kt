@@ -128,7 +128,6 @@ class Task private constructor(
             completedAt = completedAt
         )
     }
-
 }
 
 sealed class TaskError(override val message: String) : BusinessError {

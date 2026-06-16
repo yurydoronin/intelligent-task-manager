@@ -3,6 +3,7 @@ package task.manager.application.ports.input.commands
 import arrow.core.Either
 import arrow.core.raise.either
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import task.manager.application.ports.output.persistence.LoadTaskRepositoryPort
 import task.manager.application.ports.output.persistence.SaveTaskRepositoryPort
 import task.manager.domain.model.task.TaskError
@@ -17,6 +18,7 @@ class UpdateTaskUseCaseImpl(
     private val timeProvider: TimeProvider,
 ) : UpdateTaskUseCase {
 
+    @Transactional
     override fun execute(command: UpdateTaskCommand): Either<BusinessError, Unit> = either {
         val existingTask = loadTaskPort.findById(TaskId(command.taskId))
             ?: raise(TaskError.TaskNotFound)

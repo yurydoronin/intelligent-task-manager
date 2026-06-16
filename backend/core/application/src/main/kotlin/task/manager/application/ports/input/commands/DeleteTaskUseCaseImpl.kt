@@ -4,6 +4,7 @@ import arrow.core.Either
 import arrow.core.raise.either
 import arrow.core.raise.ensureNotNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import task.manager.application.ports.output.persistence.DeleteTaskRepositoryPort
 import task.manager.application.ports.output.persistence.LoadTaskRepositoryPort
 import task.manager.domain.model.task.TaskError
@@ -16,6 +17,7 @@ class DeleteTaskUseCaseImpl(
     private val deleteTaskPort: DeleteTaskRepositoryPort
 ) : DeleteTaskUseCase {
 
+    @Transactional
     override fun execute(command: DeleteTaskCommand): Either<BusinessError, Unit> = either {
         val task = ensureNotNull(loadTaskPort.findById(TaskId(command.taskId))) {
             TaskError.TaskNotFound
