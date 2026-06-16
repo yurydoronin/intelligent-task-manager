@@ -8,7 +8,9 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":common:types"))
 
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-web:4.0.5")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.0.5")
 
     implementation("tools.jackson.module:jackson-module-kotlin:3.1.0")
 

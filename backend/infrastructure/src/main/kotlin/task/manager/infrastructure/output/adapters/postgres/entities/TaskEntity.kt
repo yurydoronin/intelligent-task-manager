@@ -6,6 +6,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.time.Instant
 import java.util.UUID
+import org.springframework.data.annotation.Version
 
 @Entity
 @Table(name = "task")
@@ -20,7 +21,9 @@ class TaskEntity private constructor(
     val createdAt: Instant,
     val deadline: Instant?,
     @Column(name = "completed_at")
-    val completedAt: Instant?
+    val completedAt: Instant?,
+    @Version
+    val version: Long? = null,
 ) {
     companion object {
         fun of(

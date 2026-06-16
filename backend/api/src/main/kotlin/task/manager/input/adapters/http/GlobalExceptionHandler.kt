@@ -3,6 +3,8 @@ package task.manager.input.adapters.http
 import org.slf4j.LoggerFactory
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
+import org.springframework.dao.OptimisticLockingFailureException
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -20,6 +22,15 @@ class GlobalExceptionHandler {
         return ResponseEntity
             .badRequest()
             .body(ex.message ?: "Invalid input")
+    }
+
+    @ExceptionHandler(OptimisticLockingFailureException::class)
+    fun handleOptimisticLock(ex: OptimisticLockingFailureException): ResponseEntity<String> {
+        log.warn("Optimistic lock failure: {}", ex.message)
+
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT)
+            .body("Conflict: concurrent modification detected")
     }
 
     @ExceptionHandler(Exception::class)
